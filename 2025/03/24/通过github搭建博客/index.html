@@ -14,8 +14,14 @@
 <meta property="og:description" content="前言本人是软件工程专业的毕业生，正在学习人工智能，我会将我在学习过程中的一些问题和感悟写在这个博客中，同时也在熟悉markdown的语法。这是我的第一篇博客，本篇主要介绍我是如何通过github搭建该博客，以及在搭建中遇到的一些问题和解决方法。 事前准备搭建前我们要配置好所需要的环境：Node.js,git,npmNode.js官网：https:&#x2F;&#x2F;nodejs.orggit官网：https:&#x2F;&#x2F;">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/images/1.1.png">
+<meta property="og:image" content="http://example.com/images/1.2.png">
+<meta property="og:image" content="http://example.com/images/1.3png">
+<meta property="og:image" content="http://example.com/images/1.4.png">
+<meta property="og:image" content="http://example.com/images/1.5.png">
+<meta property="og:image" content="http://example.com/images/1.6.png">
+<meta property="og:image" content="http://example.com/images/1.7.png">
 <meta property="article:published_time" content="2025-03-24T06:49:12.000Z">
-<meta property="article:modified_time" content="2025-03-24T07:41:14.472Z">
+<meta property="article:modified_time" content="2025-03-24T15:36:11.119Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/images/1.1.png">
@@ -103,6 +109,26 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br><span class="line">git -v</span><br></pre></td></tr></table></figure>
 
 <p><img src="/images/1.1.png" alt="检查版本"></p>
+<h1 id="本地搭建"><a href="#本地搭建" class="headerlink" title="本地搭建"></a>本地搭建</h1><p>首先安装Hexo</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+<p>检查版本测试安装是否成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+<p><img src="/images/1.2.png" alt="检查版本"><br>安装hexo的依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
+<p>搭建本地博客,首先初始化一个博客</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo init <span class="comment">#初始化</span></span><br><span class="line">hexo s    <span class="comment">#开启本地预览</span></span><br></pre></td></tr></table></figure>
+<p><img src="/images/1.3png" alt="浏览"><br>打开浏览器访问<a href="http://localhost:4000就能看到初始化的本地博客">http://localhost:4000就能看到初始化的本地博客</a></p>
+<h1 id="将博客部署到GitHub"><a href="#将博客部署到GitHub" class="headerlink" title="将博客部署到GitHub"></a>将博客部署到GitHub</h1><p>首先我们要在Github上创建一个repository，名字要为：username.github.io(username表示你GitHub的用户名)<br><img src="/images/1.4.png" alt="创建"><br>这里本人之前创建过所以会显示已经存在<br>然后是配置SSH keys，打开控制台输入以下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;github登录邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+<p>查看刚刚创建好的文件，复制里面的内容，点击Github右上角的头像，选择SSH and GPG keys,点击new SSH key<br><img src="/images/1.5.png" alt="设置"><br>随便写个title，将刚刚复制的内容粘贴进去，点击Add SSH key即可<br>输入以下命令检测是否成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<p><img src="/images/1.6.png" alt="检测"><br>出现以上信息则表示SSH配置成功<br>之后输入以下两行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;BugCreator123&quot;</span>  <span class="comment">#user.name后是GitHub的username</span></span><br><span class="line">git config --global user.email <span class="string">&quot;xxxxx@outlook.com&quot;</span> <span class="comment">#user.email后是GitHub注册邮箱</span></span><br></pre></td></tr></table></figure>
+<p>进行到这已经离成功不远了，下面只需要在初始化博客创建间的文件夹下打开控制台输入如下代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
+<p>或者分别输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<p><img src="/images/1.7.png" alt="结果"></p>
 
       
     </div>
