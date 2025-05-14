@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>张容恺 - 算法工程师</title>
+    <style>
+        /* 全局样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* 平滑滚动 */
+        }
+
+        body {
+            font-family: 'Arial', sans-serif; /* 正文使用Arial字体 */
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-family: 'Microsoft YaHei', sans-serif; /* 标题使用微软雅黑 */
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #333;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #3498db; /* 主色调 */
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #3498db; /* 主色调 */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background:-color #2980b9; /* 深色辅助色调 */
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-family: 'Microsoft YaHei', sans-serif; /* 标题使用微软雅黑 */
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #3498db; /* 主色调 */
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #3498db; /* 主色调 */
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* 首屏展示 */
+        .hero {
+            height: 100vh;
+            display: flex;
+           -items align: center;
+            background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-family: 'Microsoft YaHei', sans-serif; /* 标题使用微软雅黑 */
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .hero-text {
+            font-size: .12rem;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .hero-btn {
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        /* 关于我 */
+        .about {
+            background-color: white;
+        }
+
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .about-img {
+            flex: 1;
+            min-width: 300px;
+            margin-right: 50px;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-text {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .about-title {
+            font-family: 'Microsoft YaHei', sans-serif; /* 标题使用微软雅黑 */
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+        }
+
+        /* 专业经历 */
+        .experience {
+            background-color: #f8f9fa;
+        }
+
+        .experience-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .experience-item {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba0(, 0, 0, 0.1);
+        }
+
+        .experience-title {
+            font-family: 'Microsoft YaHei', sans-serif; /* 标题使用微软雅黑 */
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #3498db; /* 主色调 */
+        }
+
+        .experience-company {
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .experience-duration {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .experience-description {
+            margin-bottom: 15px;
+        }
+
+        /* 技能 */
+        .skills {
+            background-color: white;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .skill-category {
+            flex-basis: calc(50% - 15px);
+            margin-bottom: 40px;
+        }
+
+        .skill-category-title {
+            font-family: 'Microsoft YaHei', sans-serif; /* 标题使用微软雅黑 */
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #3498db; /* 主色调 */
+        }
+
+        .skill-item {
+            margin-bottom: 15px;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .skill-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background-color: #3498db; /* 主色调 */
+            border-radius: 5px;
+        }
+
+        /* 项目展示 */
+        .projects {
+            background-color: #f8f9fa;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-img img {
+            transform: scale(1.1);
+        }
+
+        .project-content {
+            padding: 20px;
+        }
+
+        .project-title {
+            font-family: 'Microsoft YaHei', sans-serif; /* 标题使用微软雅黑 */
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .project-description {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .project-link {
+            color: #3498db; /* 主色调 */
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 教育背景 */
+        .education {
+            background-color: white;
+        }
+
+        .education-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .education-item {
+            border-left: 3px solid #3498db; /* 主色调 */
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .education-item::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: #3498db; /* 主色调 */
+        }
+
+        .education-title {
+            font-family: 'Microsoft YaHei', sans-serif; /* 标题使用微软雅黑 */
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #3498db; /* 主色调 */
+        }
+
+        .education-school {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .education-duration {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 10px;
+        }
+
+        .education-description {
+            color: #555;
+        }
+
+        /* 联系方式 */
+        .contact {
+            background-color: #f8f9fa;
+        }
+
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            margin-right: 50px;
+        }
+
+        .contact-info-title {
+            font-family: 'Microsoft YaHei', sans-serif; /* 标题使用微软雅黑 */
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #3498db; /* 主色调 */
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .contact-icon {
+            margin-right: 15px;
+            font-size: 1.2rem;
+            color: #3498db; /* 主色调 */
+        }
+
+        .contact-text h4 {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .contact-form {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #3498db; /* 主色调 */
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* 页脚 */
+        .footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+
+        .footer-title {
+            font-family: 'Microsoft YaHei', sans-serif; /* 标题使用微软雅黑 */
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #3498db; /* 主色调 */
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #3498db; /* 主色调 */
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: #3498db; /* 主色调 */
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .about-img, .about-text {
+                flex: 100%;
+                margin-right: 0;
+                margin-bottom: 30px;
+            }
+
+            .skill-category {
+                flex-basis: 100%;
+            }
+
+            .contact-info, .contact-form {
+                flex: 100%;
+                margin-right: 0;
+                margin-bottom: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-container {
+                padding: 15px 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .footer-col {
+                flex: 100%;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .animate.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 项目详细信息样式 */
+        .project-details {
+            display: none;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            margin-top: 15px;
+            animation: fadeInUp 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header class="navbar">
+        <div class="container navbar-container">
+            <div class="logo">张容恺</div>
+            <ul class="nav-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#about">关于我</a></li>
+                <li><a href="#experience">专业经历</a></li>
+                <li><a href="#skills">技能</a></li>
+                <li><a href="#projects">项目展示</a></li>
+                <li><a href="#education">教育背景</a></li>
+                <li><a href="#contact">联系方式</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- 首屏展示 -->
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <h1 class="hero-title animate">张容恺</h1>
+            <p class="hero-subtitle animate">算法工程师</p>
+            <p class="hero-text animate">致力于机器学习、深度学习等前沿算法的研究与应用，为企业提供高效的算法解决方案。</p>
+            <a href="#contact" class="btn hero-btn">联系我</a>
+        </div>
+    </section>
+
+    <!-- 关于我 -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">关于我</h2>
+            <div class="about-content">
+                <div class="about-img animate">
+                    <img src="https://via.placeholder.com/500x600" alt="张容恺">
+                </div>
+                <div class="about-text animate">
+                    <h3 class="about-title">我是张容恺，一位算法工程师</h3>
+                    <p>我拥有扎实的算法基础和丰富的项目经验，专注于机器学习、深度学习、自然语言处理和计算机视觉等领域的研究与实践。</p>
+                    <p>在多年的工作中，我参与了多个重要项目，包括图像识别、自然语言处理、推荐系统等，为公司带来了显著的经济效益和市场竞争力提升。</p>
+                    <p>我热衷于探索新技术，解决实际问题，同时也注重团队协作和知识分享。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 专业经历 -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">专业经历</h2>
+            <div class="experience-list">
+                <div class="experience-item animate">
+                    <h3 class="experience-title">算法工程师</h3>
+                    <p class="experience-company">[公司名称 1]</p>
+                    <p class="experience-duration">[入职日期]-[离职日期]</p>
+                    <p class="experience-description"><strong>算法研究与开发：</strong>深入研究机器学习、深度学习等前沿算法，根据项目需求设计并开发高效算法模型。在图像识别项目中，探索多种卷积神经网络架构，如ResNet、Inception等，最终实现图像分类准确率在测试集上达到[X]%以上。</p>
+                    <p class="experience-description"><strong>数据处理与分析：</strong>收集、清洗和预处理大规模数据集，挖掘特征和规律，为算法模型训练提供高质量数据支持。在自然语言处理项目中，对海量文本数据进行分词、词性标注、命名实体识别等预处理操作。</p>
+                </div>
+                <div class="experience-item animate">
+                    <h3 class="experience-title">算法工程师</h3>
+                    <p class="experience-company">[公司名称 2]</p>
+                    <p class="experience-duration">[入职日期]-[离职日期]</p>
+                    <p class="experience-description"><strong>模型训练与优化：</strong>运用机器学习框架(如TensorFlow、PyTorch等)训练算法模型，设置合理的训练策略和优化算法，提升模型性能和泛化能力。在推荐系统项目中，针对用户行为数据的稀疏性和冷启动问题，采用矩阵分解和深度神经网络相结合的方法，使推荐准确率提高[X]%。</p>
+                    <p class="experience-description"><strong>算法部署与应用：</strong>将训练好的算法模型部署到实际生产环境中，与工程团队合作确保模型稳定运行。在智能客服系统中集成自然语言处理算法模型，实现自动问答、工单生成等功能，提高客服效率和用户满意度。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 技能 -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">技能</h2>
+            <div class="skills-container">
+                <div class="skill-category animate">
+                    <h3 class="skill-category-title">编程语言</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Python</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>C++</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Java</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category animate">
+                    <h3 class="skill-category-title">技术框架</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>TensorFlow</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>PyTorch</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Scikit-learn</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category animate">
+                    <h3 class="skill-category-title">算法领域</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>机器学习</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>深度学习</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>自然语言处理</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 85%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category animate">
+                    <h3 class="skill-category-title">大数据处理</h3>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Hadoop</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>Spark</span>
+                            <span>70%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-name">
+                            <span>数据可视化</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 项目展示 -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">项目展示</h2>
+            <div class="projects-grid">
+                <div class="project-card animate">
+                    <div class="project-img">
+                        <img src="https://via.placeholder.com/600x400" alt="图像识别项目">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">图像识别项目</h3>
+                        <p class="project-description">研究多种卷积神经网络架构，优化超参数，实现图像分类准确率达到[X]%以上。</p>
+                        <button class="project-link" onclick="toggleProjectDetails(this)">查看详情</button>
+                        <div class="project-details">
+                            <p>主导的图像识别项目在公司内部举办的算法大赛中获得第一名，所开发的算法模型成功应用于公司的产品中，为公司带来了显著的经济效益和市场竞争力提升，产品在图像识别相关业务领域的市场份额增长了[X]%。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card animate">
+                    <div class="project-img">
+                        <img src="https://via.placeholder.com/600x400" alt="自然语言处理项目">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">自然语言处理项目</h3>
+                        <p class="project-description">文本数据预处理，优化算法模型，提高文本分析效率[X]%。</p>
+                        <button class="project-link" onclick="toggleProjectDetails(this)">查看详情</button>
+                        <div class="project-details">
+                            <p>在自然语言处理项目中，通过优化算法模型和数据处理流程，将文本分析的效率提高了[X]%，为公司节省了大量的人力和时间成本，同时提升了产品在文本处理功能上的用户体验和满意度，用户投诉率降低了[X]%。</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card animate">
+                    <div class="project-img">
+                        <img src="https://via.placeholder.com/600x400" alt="推荐系统项目">
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">推荐系统项目</h3>
+                        <p class="project-description">采用矩阵分解和深度神经网络相结合的方法，提高推荐准确率[X]%。</p>
+                        <button class="project-link" onclick="toggleProjectDetails(this)">查看详情</button>
+                        <div class="project-details">
+                            <p>与工程团队协作完成的推荐系统项目上线后，平台的用户活跃度和转化率分别提升了[X]%和[X]%，为公司的业务增长做出了重要贡献，该项目获得公司年度创新奖。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 教育背景 -->
+    <section id="education" class="education">
+        <div class="container">
+            <h2 class="section-title">教育背景</h2>
+            <div class="education-list">
+                <div class="education-item animate">
+                    <h3 class="education-title">南京审计大学</h3>
+                    <p class="education-school">软件工程 本科</p>
+                    <p class="education-duration">2020-2024</p>
+                    <p class="education-description">在校期间系统学习了计算机科学与技术、软件工程等相关课程，打下了坚实的理论基础。积极参与各类编程竞赛和科研项目，培养了良好的编程能力和团队协作能力。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系方式 -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">联系方式</h2>
+            <div class="contact-container">
+                <div class="contact-info animate">
+                    <h3 class="contact-info-title">联系我</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>电话</h4>
+                            <p>13845612369</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>邮箱</h4>
+                            <p>rongkai.zhang@outlook.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>地址</h4>
+                            <p>中国，南京</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form animate">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="您的姓名" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="您的邮箱" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="主题">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="您的留言" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">发送消息</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <h3 class="footer-title">关于我</h3>
+                <p>张容恺，算法工程师，致力于机器学习、深度学习等前沿算法的研究与应用。</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-title">快速链接</h3>
+                <ul class="footer-links">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#about">关于我</a></li>
+                    <li><a href="#experience">专业经历</a></li>
+                    <li><a href="#skills">技能</a></li>
+                    <li><a href="#projects">项目展示</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3 class="footer-title">联系我</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-phone"></i> 13845612369</li>
+                    <li><i class="fas fa-envelope"></i> rongkai.zhang@outlook.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 中国，南京</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 张容恺. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 导航菜单切换
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // 导航链接点击后关闭菜单
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 滚动动画
+        const animateElements = document.querySelectorAll('.animate');
+
+        function checkInView() {
+            animateElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100 && elementBottom > 0) {
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkInView);
+        window.addEventListener('load', checkInView);
+
+        // 项目详情显示/隐藏
+        function toggleProjectDetails(button) {
+            const details = button.nextElementSibling;
+            if (details.style.display === 'block') {
+                details.style.display = 'none';
+                button.textContent = '查看详情';
+            } else {
+                details.style.display = 'block';
+                button.textContent = '收起详情';
+            }
+        }
+
+        // 联系表单提交
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('感谢您的留言！我会尽快回复您。');
+            this.reset();
+        });
+
+        // 添加FontAwesome图标库
+        const fontAwesome = document.createElement('link');
+        fontAwesome.rel = 'stylesheet';
+        fontAwesome.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css';
+        document.head.appendChild(fontAwesome);
+    </script>
+</body>
+</html>
